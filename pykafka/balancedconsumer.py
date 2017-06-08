@@ -360,7 +360,7 @@ class BalancedConsumer(object):
         if partitions is None:
             partitions = []
         # Only re-create internal consumer if something changed.
-        if partitions != self._partitions:
+        if partitions != self._partitions or not self._consumer:
             cns = self._get_internal_consumer(partitions=list(partitions), start=start)
             if self._post_rebalance_callback is not None:
                 old_offsets = (self._consumer.held_offsets
